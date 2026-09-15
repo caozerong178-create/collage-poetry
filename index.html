@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拼贴诗编辑器 - Collage Poetry Editor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 工具栏 -->
+        <header class="toolbar">
+            <h1>✨ 拼贴诗编辑器</h1>
+            <div class="toolbar-buttons">
+                <button id="saveBtn" class="btn btn-primary">💾 保存</button>
+                <button id="exportBtn" class="btn btn-success">📥 导出图片</button>
+                <button id="clearBtn" class="btn btn-danger">🗑️ 清空</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- 侧边栏：素材管理 -->
+            <aside class="sidebar">
+                <h2>📚 素材库</h2>
+                
+                <!-- 文字输入 -->
+                <div class="input-section">
+                    <h3>粘贴文字</h3>
+                    <textarea id="textInput" placeholder="粘贴你的文字素材..."></textarea>
+                    <button id="addTextBtn" class="btn btn-small">添加文字</button>
+                </div>
+
+                <!-- 图片上传 -->
+                <div class="input-section">
+                    <h3>上传图片</h3>
+                    <input type="file" id="imageInput" accept="image/*" multiple>
+                    <button id="processImageBtn" class="btn btn-small">提取关键词</button>
+                    <div id="imagePreview" class="image-preview"></div>
+                </div>
+
+                <!-- 关键词编辑 -->
+                <div class="input-section">
+                    <h3>关键词库</h3>
+                    <div id="keywordsList" class="keywords-list"></div>
+                </div>
+
+                <!-- 快速样式 -->
+                <div class="input-section">
+                    <h3>⚙️ 文字样式</h3>
+                    <div class="style-controls">
+                        <label>
+                            大小：
+                            <input type="range" id="fontSize" min="12" max="72" value="24" step="2">
+                            <span id="fontSizeValue">24</span>px
+                        </label>
+                        <label>
+                            旋转：
+                            <input type="range" id="rotation" min="0" max="360" value="0" step="5">
+                            <span id="rotationValue">0</span>°
+                        </label>
+                        <label>
+                            <input type="checkbox" id="boldText"> 加粗
+                        </label>
+                        <label>
+                            <input type="checkbox" id="italicText"> 斜体
+                        </label>
+                        <label>
+                            颜色：
+                            <input type="color" id="textColor" value="#000000">
+                        </label>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 编辑画布 -->
+            <main class="canvas-container">
+                <div id="canvas" class="canvas">
+                    <!-- 可拖拽的文字元素将在这里生成 -->
+                </div>
+            </main>
+        </div>
+
+        <!-- 元素编辑面板 -->
+        <div id="editPanel" class="edit-panel hidden">
+            <div class="edit-panel-content">
+                <h3>编辑元素</h3>
+                <input type="text" id="elementText" placeholder="编辑文字">
+                <div class="edit-controls">
+                    <label>
+                        大小：<input type="number" id="editFontSize" min="12" max="120" value="24">px
+                    </label>
+                    <label>
+                        旋转：<input type="number" id="editRotation" min="0" max="360" value="0">°
+                    </label>
+                    <label>
+                        颜色：<input type="color" id="editColor" value="#000000">
+                    </label>
+                    <label>
+                        <input type="checkbox" id="editBold"> 加粗
+                    </label>
+                    <label>
+                        <input type="checkbox" id="editItalic"> 斜体
+                    </label>
+                </div>
+                <div class="edit-panel-buttons">
+                    <button id="deleteBtn" class="btn btn-danger btn-small">删除</button>
+                    <button id="closeEditBtn" class="btn btn-small">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载中提示 -->
+    <div id="loadingIndicator" class="loading-indicator hidden">
+        <div class="spinner"></div>
+        <p>正在处理图片...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
